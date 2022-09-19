@@ -6,15 +6,17 @@ import java.util.Scanner;
 
 public class CurrencyConverter {
     static final double USD_MULTIPLIER = 60.5;
+
     public static double convertToRUB(double a) {
         return a * USD_MULTIPLIER;
     }
+
     public static double convertToUSD(double a) {
         return a / USD_MULTIPLIER;
     }
+
     public static void main(String[] args) {
         NumberFormat numberFormatUSD = NumberFormat.getCurrencyInstance(Locale.US);
-        final double USD_MULTIPLIER = 60.5;
         final String RUB_SYMBOL = "\u20BD";
         System.out.println("Choose mode:\n1. USD -> RUB\n2. RUB -> USD");
         Scanner scanner = new Scanner(System.in);
