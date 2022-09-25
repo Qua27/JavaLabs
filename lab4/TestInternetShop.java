@@ -77,11 +77,7 @@ public class TestInternetShop {
         Cart cart = new Cart();
         while (true) {
             try {
-                int i = 1;
-                for (ProductCatalog productCatalog : internetShop.getCatalogs()) {
-                    System.out.printf("%d. %s\n", i, productCatalog.getName());
-                    i++;
-                }
+                internetShop.printCatalogs();
                 System.out.println("0. To cart");
                 System.out.println("-1. Exit");
                 System.out.println("Choose a catalog:");
@@ -96,11 +92,7 @@ public class TestInternetShop {
                         continue;
                     }
                     System.out.println("Your cart:");
-                    i = 1;
-                    for (CartProduct product : cart.getProducts()) {
-                        System.out.printf("%d. %s %d x %.2f%s\n", i, product.getProduct().name(), product.getQuantity(), product.getProduct().getPrice(), Product.RUB_SYMBOL);
-                        i++;
-                    }
+                    cart.printCart();
                     System.out.printf("Total: %.2f%s\n", cart.getTotal(), Product.RUB_SYMBOL);
                     System.out.println("Do you want to purchase? (1 - yes; 0 - no)\nPress -2 if you want to remove something from your cart");
                     choice = scanner.nextInt();
@@ -122,11 +114,7 @@ public class TestInternetShop {
                     }
                 }
                 ProductCatalog chosenCatalog = internetShop.getCatalogs().get(choice - 1);
-                i = 1;
-                for (Product product : chosenCatalog.getProducts()) {
-                    System.out.printf("%d. %s\n", i, product);
-                    i++;
-                }
+                chosenCatalog.printCatalog();
                 System.out.println("-1. Go back to catalogs");
                 System.out.println("Choose a product:");
                 choice = scanner.nextInt();
@@ -226,6 +214,14 @@ class ProductCatalog {
     public void addProduct(TestInternetShop.Product product) {
         products.add(product);
     }
+
+    public void printCatalog() {
+        int i = 1;
+        for (TestInternetShop.Product product : products) {
+            System.out.printf("%d. %s\n", i, product);
+            i++;
+        }
+    }
 }
 
 class CartProduct {
@@ -296,5 +292,13 @@ class InternetShop {
 
     public void addCatalog(ProductCatalog productCatalog) {
         catalogs.add(productCatalog);
+    }
+
+    public void printCatalogs() {
+        int i = 1;
+        for (ProductCatalog productCatalog : catalogs) {
+            System.out.printf("%d. %s\n", i, productCatalog.getName());
+            i++;
+        }
     }
 }
