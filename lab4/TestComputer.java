@@ -1,7 +1,7 @@
 package ru.mirea.lab4;
 
 public class TestComputer {
-    enum Computer {
+    public enum Computer {
         ASUS(new Processor("Processor1", 6, 3.8, 14), new Memory("Memory1", 3.1, 4), new Monitor("1920x1080", 120, 5)),
         HP(new Processor("Processor2", 8, 4.3, 10), new Memory("Memory1", 3.2, 8), new Monitor("1920x1080", 144, 4)),
         LENOVO(new Processor("Processor3", 4, 3.9, 12), new Memory("Memory1", 2.9, 6), new Monitor("1920x1080", 90, 3));
