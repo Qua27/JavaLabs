@@ -40,49 +40,33 @@ interface WomenClothing {
 
 abstract class Clothes {
     static final String RUB_SYMBOL = "\u20BD";
+    private final Size size;
+    private final double price;
+    private final String color;
 
-    enum Gender {
-        MALE,
-        FEMALE,
-        BOTH
+    public Clothes(Size size, double price, String color) {
+        this.size = size;
+        this.price = price;
+        this.color = color;
     }
-
-    private Size size;
-    private double price;
-    private String color;
-
-    abstract public Gender getClothesGender();
 
     public Size getSize() {
         return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 }
 
 class TShirt extends Clothes implements MenClothing, WomenClothing {
 
-    @Override
-    public Gender getClothesGender() {
-        return Gender.BOTH;
+    public TShirt(Size size, double price, String color) {
+        super(size, price, color);
     }
 
     @Override
@@ -107,9 +91,8 @@ class TShirt extends Clothes implements MenClothing, WomenClothing {
 
 class Pants extends Clothes implements MenClothing, WomenClothing {
 
-    @Override
-    public Gender getClothesGender() {
-        return Gender.BOTH;
+    public Pants(Size size, double price, String color) {
+        super(size, price, color);
     }
 
     @Override
@@ -134,9 +117,8 @@ class Pants extends Clothes implements MenClothing, WomenClothing {
 
 class Skirt extends Clothes implements WomenClothing {
 
-    @Override
-    public Gender getClothesGender() {
-        return Gender.FEMALE;
+    public Skirt(Size size, double price, String color) {
+        super(size, price, color);
     }
 
     @Override
@@ -156,9 +138,8 @@ class Skirt extends Clothes implements WomenClothing {
 
 class Tie extends Clothes implements MenClothing {
 
-    @Override
-    public Gender getClothesGender() {
-        return Gender.MALE;
+    public Tie(Size size, double price, String color) {
+        super(size, price, color);
     }
 
     @Override
@@ -181,7 +162,7 @@ class Atelier implements MenClothing, WomenClothing {
     @Override
     public void dressMan(ArrayList<Clothes> clothes) {
         for (Clothes element : clothes) {
-            if (element.getClothesGender() == Clothes.Gender.MALE || element.getClothesGender() == Clothes.Gender.BOTH) {
+            if (element instanceof MenClothing) {
                 System.out.printf("%s | %s\n", element, element.getSize().getDescription());
             }
         }
@@ -190,7 +171,7 @@ class Atelier implements MenClothing, WomenClothing {
     @Override
     public void dressWoman(ArrayList<Clothes> clothes) {
         for (Clothes element : clothes) {
-            if (element.getClothesGender() == Clothes.Gender.FEMALE || element.getClothesGender() == Clothes.Gender.BOTH) {
+            if (element instanceof WomenClothing) {
                 System.out.printf("%s | %s\n", element, element.getSize().getDescription());
             }
         }
@@ -200,22 +181,10 @@ class Atelier implements MenClothing, WomenClothing {
 public class TestAtelier {
     public static void main(String[] args) {
         ArrayList<Clothes> clothes = new ArrayList<>();
-        TShirt tShirt = new TShirt();
-        tShirt.setSize(Size.M);
-        tShirt.setPrice(249.99);
-        tShirt.setColor("white");
-        Pants pants = new Pants();
-        pants.setSize(Size.XS);
-        pants.setPrice(2099.99);
-        pants.setColor("black");
-        Skirt skirt = new Skirt();
-        skirt.setSize(Size.L);
-        skirt.setPrice(1599.99);
-        skirt.setColor("blue");
-        Tie tie = new Tie();
-        tie.setSize(Size.S);
-        tie.setPrice(599.99);
-        tie.setColor("brown");
+        TShirt tShirt = new TShirt(Size.M, 249.99, "white");
+        Pants pants = new Pants(Size.XS, 2099.99, "black");
+        Skirt skirt = new Skirt(Size.L, 1599.99, "blue");
+        Tie tie = new Tie(Size.S, 599.99, "brown");
         clothes.add(tShirt);
         clothes.add(pants);
         clothes.add(skirt);
