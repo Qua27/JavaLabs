@@ -31,11 +31,11 @@ enum Size {
 }
 
 interface MenClothing {
-    void dressMan(ArrayList<Clothes> clothes);
+    void dressMan();
 }
 
 interface WomenClothing {
-    void dressWoman(ArrayList<Clothes> clothes);
+    void dressWoman();
 }
 
 abstract class Clothes {
@@ -70,13 +70,13 @@ class TShirt extends Clothes implements MenClothing, WomenClothing {
     }
 
     @Override
-    public void dressMan(ArrayList<Clothes> clothes) {
-
+    public void dressMan() {
+        System.out.println("T-shirt is put on man");
     }
 
     @Override
-    public void dressWoman(ArrayList<Clothes> clothes) {
-
+    public void dressWoman() {
+        System.out.println("T-shirt is put on woman");
     }
 
     @Override
@@ -96,13 +96,13 @@ class Pants extends Clothes implements MenClothing, WomenClothing {
     }
 
     @Override
-    public void dressMan(ArrayList<Clothes> clothes) {
-
+    public void dressMan() {
+        System.out.println("Pants are put on man");
     }
 
     @Override
-    public void dressWoman(ArrayList<Clothes> clothes) {
-
+    public void dressWoman() {
+        System.out.println("Pants are put on woman");
     }
 
     @Override
@@ -122,8 +122,8 @@ class Skirt extends Clothes implements WomenClothing {
     }
 
     @Override
-    public void dressWoman(ArrayList<Clothes> clothes) {
-
+    public void dressWoman() {
+        System.out.println("Skirt is put on woman");
     }
 
     @Override
@@ -143,8 +143,8 @@ class Tie extends Clothes implements MenClothing {
     }
 
     @Override
-    public void dressMan(ArrayList<Clothes> clothes) {
-
+    public void dressMan() {
+        System.out.println("Tie is put on man");
     }
 
     @Override
@@ -157,22 +157,20 @@ class Tie extends Clothes implements MenClothing {
     }
 }
 
-class Atelier implements MenClothing, WomenClothing {
+class Atelier {
 
-    @Override
     public void dressMan(ArrayList<Clothes> clothes) {
         for (Clothes element : clothes) {
             if (element instanceof MenClothing) {
-                System.out.printf("%s | %s\n", element, element.getSize().getDescription());
+                ((MenClothing) element).dressMan();
             }
         }
     }
 
-    @Override
     public void dressWoman(ArrayList<Clothes> clothes) {
         for (Clothes element : clothes) {
             if (element instanceof WomenClothing) {
-                System.out.printf("%s | %s\n", element, element.getSize().getDescription());
+                ((WomenClothing) element).dressWoman();
             }
         }
     }
