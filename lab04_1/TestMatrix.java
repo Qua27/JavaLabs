@@ -11,11 +11,8 @@ public class TestMatrix {
 }
 
 class Matrix {
-    private double[][] array;
-    private int n, m;
-
-    public Matrix() {
-    }
+    private final double[][] array;
+    private final int n, m;
 
     public Matrix(double[][] array, int n, int m) {
         this.array = array;
