@@ -7,9 +7,9 @@ public class TestQuickSort {
     public static void main(String[] args) {
         int size = 3;
         Student_[] students = new Student_[size];
-        students[0] = new Student_("Andrew", 40);
-        students[1] = new Student_("Paul", 60);
-        students[2] = new Student_("Ryan", 20);
+        students[0] = new Student_("Andrew", 50);
+        students[1] = new Student_("Paul", 90);
+        students[2] = new Student_("Ryan", 80);
         System.out.println(Arrays.toString(students));
         SortingStudentsByGPA sortingStudentsByGPA = new SortingStudentsByGPA();
         sortingStudentsByGPA.quickSort(students);
@@ -21,34 +21,34 @@ record Student_(String name, int gpa) {
 }
 
 class SortingStudentsByGPA implements Comparator<Student_> {
-
-    public void quickSort(Student_[] arr) {
-        quickSort(arr, 0, arr.length - 1);
+    public void swap(Student_[] array, int i, int j) {
+        Student_ temporary = array[i];
+        array[i] = array[j];
+        array[j] = temporary;
     }
 
-    public void quickSort(Student_[] arr, int begin, int end) {
-        if (begin < end) {
-            int partitionIndex = partition(arr, begin, end);
-            quickSort(arr, begin, partitionIndex - 1);
-            quickSort(arr, partitionIndex + 1, end);
-        }
-    }
-
-    private int partition(Student_[] arr, int begin, int end) {
-        Student_ pivot = arr[end];
-        int i = begin;
-        for (int j = end; j >= begin; j--) {
-            if (this.compare(arr[j], pivot) > 0) {
-                Student_ temp1 = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp1;
-                i = i + 1;
+    public int partition(Student_[] array, int begin, int end) {
+        int i = begin - 1;
+        for (int j = begin; j < end; j++) {
+            if (this.compare(array[j], array[end]) > 0) {
+                i++;
+                swap(array, i, j);
             }
         }
-        Student_ temp2 = arr[i];
-        arr[i] = arr[end];
-        arr[end] = temp2;
-        return i;
+        swap(array, i + 1, end);
+        return i + 1;
+    }
+
+    public void quickSort(Student_[] array) {
+        quickSort(array, 0, array.length - 1);
+    }
+
+    public void quickSort(Student_[] array, int begin, int end) {
+        if (begin < end) {
+            int pivotIndex = partition(array, begin, end);
+            quickSort(array, begin, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, end);
+        }
     }
 
     @Override
